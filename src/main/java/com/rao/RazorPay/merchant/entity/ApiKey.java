@@ -26,15 +26,19 @@ public class ApiKey {
     @Column(length = 50, nullable = false, unique = true)
     private String keyId;
 
-    @Column(length = 255, nullable = false)
+    @Column(length = 200, nullable = false)
     private String keySecretHash;
+
+    @Column(length = 200)
+    private String previousKeySecretHash;
 
     @Column(length = 10, nullable = false)
     @Enumerated(EnumType.STRING)
     private Environment environment;
 
     @Column(nullable = false)
-    private boolean enabled;
+    @Builder.Default
+    private boolean enabled = true;
 
     private LocalDateTime lastUsedAt;
     private LocalDateTime rotatedAt;

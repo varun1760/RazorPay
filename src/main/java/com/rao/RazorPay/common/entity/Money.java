@@ -1,16 +1,17 @@
 package com.rao.RazorPay.common.entity;
 
 import jakarta.persistence.Embeddable;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Embeddable
+@Getter @NoArgsConstructor @AllArgsConstructor
+@EqualsAndHashCode
 public class Money {
     private int amountUnits;
     private String currency;
-
-    private Money(int amountUnits, String currency) {
-        this.amountUnits = amountUnits;
-        this.currency = currency;
-    }
 
     public Money add(Money money) {
         if (!this.currency.equals(money.currency)) {
