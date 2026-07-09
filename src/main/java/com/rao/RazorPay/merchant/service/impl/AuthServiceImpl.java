@@ -7,6 +7,7 @@ import com.rao.RazorPay.merchant.dto.request.MerchantSignupRequest;
 import com.rao.RazorPay.merchant.dto.response.MerchantResponse;
 import com.rao.RazorPay.merchant.entity.AppUser;
 import com.rao.RazorPay.merchant.entity.Merchant;
+import com.rao.RazorPay.merchant.mapper.MerchantMapper;
 import com.rao.RazorPay.merchant.repository.AppUserRepository;
 import com.rao.RazorPay.merchant.repository.MerchantRepository;
 import com.rao.RazorPay.merchant.service.AuthService;
@@ -23,6 +24,8 @@ public class AuthServiceImpl implements AuthService {
     private final MerchantRepository merchantRepository;
     private final AppUserRepository appUserRepository;
 
+    private final MerchantMapper merchantMapper;
+
     @Override
     @Transactional
     public MerchantResponse signup(MerchantSignupRequest request) {
@@ -31,13 +34,15 @@ public class AuthServiceImpl implements AuthService {
                     "Merchant with email already exists: " +  request.email());
         }
 
-        Merchant merchant = Merchant.builder()
-                .email(request.email())
-                .name(request.name())
-                .businessName(request.businessName())
-                .businessType(request.businessType())
-                .status(MerchantStatus.PENDING_KYC)
-                .build();
+//        Merchant merchant = Merchant.builder()
+//                .email(request.email())
+//                .name(request.name())
+//                .businessName(request.businessName())
+//                .businessType(request.businessType())
+//                .status(MerchantStatus.PENDING_KYC)
+//                .build();
+        Merchant merchant = merchantMapper.toEntityFromMerchantSignupRequest(request);
+        merchant.setStatus(MerchantStatus.PENDING_KYC);
 
         merchantRepository.save(merchant);
 
@@ -49,8 +54,9 @@ public class AuthServiceImpl implements AuthService {
                 .build();
         appUserRepository.save(appUser);
 
-        return new MerchantResponse(merchant.getId(), merchant.getName(), merchant.getEmail(),
-                merchant.getBusinessName(), merchant.getBusinessType(), merchant.getStatus());
+//        return new MerchantResponse(merchant.getId(), merchant.getName(), merchant.getEmail(),
+//                merchant.getBusinessName(), merchant.getBusinessType(), merchant.getStatus());
+        return merchantMapper.toMerchantResponse(merchant);
     }
 
 }

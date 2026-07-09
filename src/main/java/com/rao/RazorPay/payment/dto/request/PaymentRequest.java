@@ -1,0 +1,17 @@
+package com.rao.RazorPay.payment.dto.request;
+
+import com.rao.RazorPay.common.entity.Money;
+import com.rao.RazorPay.common.enums.PaymentMethod;
+
+import java.util.Map;
+import java.util.UUID;
+
+public record PaymentRequest(
+        UUID paymentId,
+        UUID orderId,
+        UUID merchantId,
+        Money amount,
+        PaymentMethod method,
+        Map<String, Object> methodDetails
+) {
+}

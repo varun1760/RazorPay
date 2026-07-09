@@ -1,10 +1,12 @@
 package com.rao.RazorPay.operations.entity;
 
+import com.rao.RazorPay.common.entity.BaseEntity;
 import jakarta.persistence.*;
+import lombok.*;
 
 @Entity
 @Table(name = "settlement_payment")
-public class SettlementPayment {
+public class SettlementPayment extends BaseEntity {
 
     @EmbeddedId
     private SettlementPaymentId id;
