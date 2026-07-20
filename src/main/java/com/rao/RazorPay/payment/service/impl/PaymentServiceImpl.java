@@ -57,6 +57,7 @@ public class PaymentServiceImpl implements PaymentService {
                 .status(PaymentStatus.CREATED)
                 .method(request.method())
                 .methodDetails(request.methodDetails())
+                .idempotencyKey(UUID.randomUUID().toString())
                 .build();
         payment = paymentRepository.save(payment);
 

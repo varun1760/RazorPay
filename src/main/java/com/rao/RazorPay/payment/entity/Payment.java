@@ -43,6 +43,7 @@ public class Payment extends BaseEntity {
     private PaymentStatus status;
 
     @Column(nullable = false)
+    @Enumerated(EnumType.STRING)
     private PaymentMethod method;
 
     @JdbcTypeCode(SqlTypes.JSON)

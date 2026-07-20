@@ -35,3 +35,6 @@ payment:
         min-delay-seconds: 4
         max-delay-seconds: 10
         success-rate: 80
+
+jwt:
+  secret-key: don't_use_in_prod_HRIl6_oijmck2B6j3-Z04QhtXvv_GUr0FQs4Mz8lSrg

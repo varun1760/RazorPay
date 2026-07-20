@@ -59,6 +59,7 @@ public class VaultServiceImpl implements VaultService {
                 .lastFour(lastFour)
                 .encryptedDek(encryptedDek)
                 .encryptedPan(encryptedPan)
+                .cardholderName(request.cardHolderName())
                 .build());
 
         String token = "token_" + RandomizerUtil.randomBase64(32);
